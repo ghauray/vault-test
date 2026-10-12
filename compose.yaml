@@ -1,0 +1,16 @@
+services:
+  web:
+    build:
+      context: ./symfony
+    environment:
+      - APP_ENV=dev
+    ports:
+      - 8888:80
+    secrets:
+      - source: web_decrypt_key
+        target: /app/config/secrets/dev/dev.decrypt.private.php
+        mode: 0400
+
+secrets:
+  web_decrypt_key:
+    file: ./conf/dev.decrypt.private.php
